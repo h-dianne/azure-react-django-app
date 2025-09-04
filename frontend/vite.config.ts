@@ -9,5 +9,18 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src")
     }
-  }
+  },
+  server: {
+    port: 3000,
+    host: true,
+    cors: true
+  },
+  build: {
+    outDir: "dist",
+    sourcemap: true
+  },
+  define: {
+    global: "globalThis"
+  },
+  envPrefix: "VITE_"
 });
