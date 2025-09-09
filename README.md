@@ -1,6 +1,6 @@
 # Azure React Django App
 
-A full-stack application implementing Single Sign-On (SSO) with Azure Active Directory using React TypeScript frontend and Django backend.
+A full-stack demo application implementing Single Sign-On (SSO) with Azure Active Directory using React TypeScript frontend and Django backend.
 
 ## Features
 
@@ -18,23 +18,7 @@ A full-stack application implementing Single Sign-On (SSO) with Azure Active Dir
 - **Token Management**: Access tokens and ID tokens stored in session storage
 - **Auto-refresh**: MSAL.js automatically refreshes tokens before expiration
 
-### Frontend Implementation
-
-- **Framework**: React 19 with TypeScript and Vite
-- **Authentication Library**: Microsoft Authentication Library (@azure/msal-react, @azure/msal-browser)
-- **UI Components**: Custom components with Radix UI and Tailwind CSS
-- **Routing**: React Router DOM for navigation
-- **Token Storage**: Session storage (not cookies) for better security
-
-### Backend Implementation
-
-- **Framework**: Django with modern Python
-- **Token Verification**: PyJWT for access token validation
-- **Public Key Caching**: Azure AD public keys cached for 24 hours
-- **User Management**: User identification via Azure AD Object ID (oid)
-- **Auto User Creation**: Creates new users or denies access based on oid
-
-## Getting Started
+## Quick Start
 
 ### Prerequisites
 
@@ -51,48 +35,35 @@ cd azure-react-django-app
 
 ### Frontend Setup
 
-1. **Navigate to frontend directory:**
+See detailed setup instructions in [`frontend/README.md`](frontend/README.md)
 
-   ```bash
-   cd frontend
-   ```
+```bash
+cd frontend
+npm install
+# Configure .env file (see frontend/README.md)
+npm run dev
+```
 
-2. **Install dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables:**
-
-   Create a `.env` file in the frontend directory with your Azure AD configuration:
-
-   ```properties
-   VITE_CLIENT_ID=your-azure-ad-client-id
-   VITE_AUTHORITY=https://login.microsoftonline.com/your-tenant-id
-   VITE_REDIRECT_URI=http://localhost:5173/
-   VITE_SCOPES=api://your-client-id/access_as_user
-   VITE_API_BASE_URL=http://localhost:8000/
-   ```
-
-4. **Start the development server:**
-
-   ```bash
-   npm run dev
-   ```
-
-   The frontend will be available at `http://localhost:5173`
-
-### Frontend Commands
-
-- **Development server**: `npm run dev`
-- **Build for production**: `npm run build`
-- **Preview production build**: `npm run preview`
-- **Lint code**: `npm run lint`
+Frontend will be available at `http://localhost:5173`
 
 ### Backend Setup
 
-Coming soon...
+See detailed setup instructions in [`backend/README.md`](backend/README.md)
+
+```bash
+cd backend
+uv sync
+# Configure .env file (see backend/README.md)
+uv run python manage.py migrate
+uv run python manage.py runserver
+```
+
+Backend API will be available at `http://localhost:8000`
+
+## Documentation
+
+- **[Frontend Documentation](frontend/README.md)**: Complete React TypeScript setup and configuration
+- **[Backend Documentation](backend/README.md)**: Complete Django backend setup and architecture
 
 ## Project Structure
 
@@ -105,22 +76,13 @@ azure-react-django-app/
 │   │   ├── pages/           # Application pages
 │   │   └── types/           # TypeScript type definitions
 │   ├── .env                 # Environment variables
-│   └── package.json         # Frontend dependencies
+│   ├── package.json         # Frontend dependencies
+│   └── README.md            # Frontend documentation
 ├── backend/                 # Django backend
 │   ├── apps/                # Django applications
 │   ├── config/              # Django configuration
-│   └── pyproject.toml       # Backend dependencies
-└── README.md
+│   ├── .env                 # Environment variables
+│   ├── pyproject.toml       # Backend dependencies
+│   └── README.md            # Backend documentation
+└── README.md                # This file
 ```
-
-## Environment Configuration
-
-### Frontend Environment Variables
-
-| Variable            | Description                    | Example                                       |
-| ------------------- | ------------------------------ | --------------------------------------------- |
-| `VITE_CLIENT_ID`    | Azure AD application client ID | `b579ca6d-274d-4c41-8cf3-7efaaf54da58`        |
-| `VITE_AUTHORITY`    | Azure AD tenant authority URL  | `https://login.microsoftonline.com/tenant-id` |
-| `VITE_REDIRECT_URI` | OAuth redirect URI             | `http://localhost:5173/`                      |
-| `VITE_SCOPES`       | API scopes for token requests  | `api://client-id/access_as_user`              |
-| `VITE_API_BASE_URL` | Backend API base URL           | `http://localhost:8000/`                      |
