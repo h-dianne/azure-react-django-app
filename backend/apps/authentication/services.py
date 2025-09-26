@@ -1,4 +1,3 @@
-# apps/authentication/services.py
 import base64
 
 import jwt
@@ -98,7 +97,7 @@ class AzureADJWTService:
             print("Fetching Azure AD public keys from JWKS endpoint")
             public_keys = self._fetch_public_keys()
 
-            # Cache for 24 hours as per PM requirement
+            # Cache for 24 hours
             cache.set(self.CACHE_KEY_JWKS, public_keys, self.CACHE_TIMEOUT)
             print("Cached Azure AD public keys for 24 hours")
         else:

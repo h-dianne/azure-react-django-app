@@ -1,4 +1,3 @@
-# apps/users/serializers.py
 from rest_framework import serializers
 
 from .models import User
@@ -7,7 +6,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for User model"""
 
-    # Match frontend UserData type expectations
+    # Match frontend UserData type
     username = serializers.CharField(read_only=True)
     email = serializers.EmailField(read_only=True)
     full_name = serializers.SerializerMethodField()

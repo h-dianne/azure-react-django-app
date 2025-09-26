@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import type { LogoutProps } from "../types";
 
-// Logout Button Component (used in Dashboard)
+// Logout Button Component
 export const LogoutButton = ({ onLogout }: LogoutProps) => {
   return (
     <Button onClick={onLogout} variant="outline">
