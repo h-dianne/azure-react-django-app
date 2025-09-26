@@ -1,59 +1,59 @@
-# Frontend - React TypeScript with Azure AD SSO
+# フロントエンド - Azure AD SSO を使った React TypeScript
 
-A modern React TypeScript frontend application with Azure Active Directory Single Sign-On integration.
+Azure Active Directory のシングルサインオン統合を持つモダンな React TypeScript フロントエンドアプリケーションです。
 
-## Features
+## 機能
 
-- **Azure AD Integration**: Seamless SSO using Microsoft Authentication Library (MSAL)
-- **Modern React**: React 19 with TypeScript and Vite for fast development
-- **UI Components**: Custom components built with Radix UI and Tailwind CSS
-- **Routing**: Client-side routing with React Router DOM
-- **Secure Token Management**: Session storage for JWT tokens with automatic refresh
+- **Azure AD 統合**: Microsoft Authentication Library (MSAL) を使用したシームレスな SSO
+- **モダンな React**: 高速開発のための React 19 と TypeScript、Vite
+- **UI コンポーネント**: Radix UI と Tailwind CSS で構築されたカスタムコンポーネント
+- **ルーティング**: React Router DOM によるクライアントサイドルーティング
+- **セキュアなトークン管理**: 自動リフレッシュ付きの JWT トークンのセッションストレージ
 
-## Technology Stack
+## 技術スタック
 
-- **Framework**: React 19 with TypeScript
-- **Build Tool**: Vite for fast development and building
-- **Authentication**: Microsoft Authentication Library (@azure/msal-react, @azure/msal-browser)
-- **UI Framework**: Tailwind CSS with custom components
-- **Component Library**: Radix UI primitives
-- **HTTP Client**: Axios for API communication
-- **Routing**: React Router DOM
+- **フレームワーク**: TypeScript を使った React 19
+- **ビルドツール**: 高速開発とビルドのための Vite
+- **認証**: Microsoft Authentication Library (@azure/msal-react, @azure/msal-browser)
+- **UI フレームワーク**: カスタムコンポーネント付きの Tailwind CSS
+- **コンポーネントライブラリ**: Radix UI プリミティブ
+- **HTTP クライアント**: API 通信のための Axios
+- **ルーティング**: React Router DOM
 
-## Implementation Details
+## 実装詳細
 
-### Authentication Flow
+### 認証フロー
 
-- **Protocol**: OpenID Connect (OIDC) / OAuth 2.0
-- **Flow**: Authorization Code Flow with PKCE for enhanced security
-- **Token Storage**: Session storage (not cookies) for better security
-- **Auto-refresh**: MSAL.js automatically refreshes tokens before expiration
+- **プロトコル**: OpenID Connect (OIDC) / OAuth 2.0
+- **フロー**: セキュリティ強化のための PKCE 付き認証コードフロー
+- **トークンストレージ**: セキュリティ向上のためのセッションストレージ
+- **自動リフレッシュ**: MSAL.js が期限切れ前に自動的にトークンをリフレッシュ
 
-### Key Components
+### 主要コンポーネント
 
-- **MSAL Configuration**: Centralized Azure AD configuration in `src/config/authConfig.ts`
-- **Authentication Pages**: Login, Dashboard, and Logout components
-- **Protected Routes**: Route-level authentication guards
-- **Token Management**: Automatic token acquisition and refresh
+- **MSAL 設定**: `src/config/authConfig.ts` での Azure AD 設定
+- **認証ページ**: ログイン、ダッシュボード、ログアウトコンポーネント
+- **保護されたルート**: ルートレベルの認証ガード
+- **トークン管理**: 自動トークン取得とリフレッシュ
 
-## Getting Started
+## セットアップ
 
-### Prerequisites
+### 前提条件
 
-- Node.js (v18 or higher)
-- Azure AD application registration
+- Node.js（v18 以上）
+- Azure AD アプリケーション登録
 
-### Installation
+### インストール
 
-1. **Install dependencies:**
+1. **依存関係をインストール:**
 
    ```bash
    npm install
    ```
 
-2. **Configure environment variables:**
+2. **環境変数を設定:**
 
-   Create a `.env` file in the frontend directory:
+   frontend ディレクトリに `.env` ファイルを作成:
 
    ```properties
    VITE_CLIENT_ID=your-azure-ad-client-id
@@ -63,73 +63,73 @@ A modern React TypeScript frontend application with Azure Active Directory Singl
    VITE_API_BASE_URL=http://localhost:8000/
    ```
 
-3. **Start the development server:**
+3. **開発サーバーを起動:**
 
    ```bash
    npm run dev
    ```
 
-   The application will be available at `http://localhost:5173`
+   アプリケーションは `http://localhost:5173` で利用できます
 
-## Available Scripts
+## 利用可能なスクリプト
 
-- **`npm run dev`**: Start development server with hot reload
-- **`npm run build`**: Build the application for production
-- **`npm run preview`**: Preview the production build locally
-- **`npm run lint`**: Run ESLint to check code quality
+- **`npm run dev`**: ホットリロード付き開発サーバーを開始
+- **`npm run build`**: 本番用アプリケーションをビルド
+- **`npm run preview`**: 本番ビルドをローカルでプレビュー
+- **`npm run lint`**: コード品質チェックのため ESLint を実行
 
-## Environment Variables
+## 環境変数
 
-| Variable            | Description                    | Example                                       |
-| ------------------- | ------------------------------ | --------------------------------------------- |
-| `VITE_CLIENT_ID`    | Azure AD application client ID | `your-client-id`                              |
-| `VITE_AUTHORITY`    | Azure AD tenant authority URL  | `https://login.microsoftonline.com/tenant-id` |
-| `VITE_REDIRECT_URI` | OAuth redirect URI             | `http://localhost:5173/`                      |
-| `VITE_SCOPES`       | API scopes for token requests  | `api://client-id/access_as_user`              |
-| `VITE_API_BASE_URL` | Backend API base URL           | `http://localhost:8000/`                      |
+| 変数名              | 説明                                     | 例                                            |
+| ------------------- | ---------------------------------------- | --------------------------------------------- |
+| `VITE_CLIENT_ID`    | Azure AD アプリケーションクライアント ID | `your-client-id`                              |
+| `VITE_AUTHORITY`    | Azure AD テナント認証局 URL              | `https://login.microsoftonline.com/tenant-id` |
+| `VITE_REDIRECT_URI` | OAuth リダイレクト URI                   | `http://localhost:5173/`                      |
+| `VITE_SCOPES`       | トークンリクエスト用 API スコープ        | `api://client-id/access_as_user`              |
+| `VITE_API_BASE_URL` | バックエンド API ベース URL              | `http://localhost:8000/`                      |
 
-## Project Structure
+## プロジェクト構造
 
 ```text
 frontend/
 ├── src/
-│   ├── components/          # Reusable UI components
-│   │   ├── auth/           # Authentication-related components
-│   │   ├── layout/         # Layout components
-│   │   └── ui/             # Base UI components (buttons, cards, etc.)
+│   ├── components/         # 再利用可能な UI コンポーネント
+│   │   ├── auth/           # 認証関連コンポーネント
+│   │   ├── layout/         # レイアウトコンポーネント
+│   │   └── ui/             # ベース UI コンポーネント（ボタン、カードなど）
 │   ├── config/
-│   │   └── authConfig.ts   # Azure AD MSAL configuration
-│   ├── hooks/              # Custom React hooks
+│   │   └── authConfig.ts   # Azure AD MSAL 設定
+│   ├── hooks/              # カスタム React フック
 │   ├── lib/
-│   │   └── utils.ts        # Utility functions
-│   ├── pages/              # Application pages
-│   │   ├── Dashboard.tsx   # Protected dashboard page
-│   │   ├── Login.tsx       # Login page
-│   │   └── Logout.tsx      # Logout page
+│   │   └── utils.ts        # ユーティリティ関数
+│   ├── pages/              # アプリケーションページ
+│   │   ├── Dashboard.tsx   # 保護されたダッシュボードページ
+│   │   ├── Login.tsx       # ログインページ
+│   │   └── Logout.tsx      # ログアウトページ
 │   ├── styles/
-│   │   └── index.css       # Global styles and Tailwind imports
+│   │   └── index.css       # グローバルスタイルと Tailwind インポート
 │   ├── types/
-│   │   └── index.ts        # TypeScript type definitions
-│   ├── App.tsx             # Main application component
-│   └── main.tsx            # Application entry point
-├── .env                    # Environment variables (create this)
-├── package.json            # Dependencies and scripts
-├── vite.config.ts          # Vite configuration
-└── tsconfig.json           # TypeScript configuration
+│   │   └── index.ts        # TypeScript 型定義
+│   ├── App.tsx             # メインアプリケーションコンポーネント
+│   └── main.tsx            # アプリケーションエントリーポイント
+├── .env                    # 環境変数（これを作成）
+├── package.json            # 依存関係とスクリプト
+├── vite.config.ts          # Vite 設定
+└── tsconfig.json           # TypeScript 設定
 ```
 
-## Azure AD Configuration
+## Azure AD 設定
 
-### Required Azure AD Setup
+### 必要な Azure AD セットアップ
 
-1. **App Registration**: Create an Azure AD app registration
-2. **Redirect URIs**: Add `http://localhost:5173/` (and production URLs)
-3. **API Permissions**: Configure necessary scopes
-4. **Token Configuration**: Enable ID tokens for implicit flow
+1. **アプリ登録**: Azure AD アプリ登録を作成
+2. **リダイレクト URI**: `http://localhost:5173/`（と本番 URL）を追加
+3. **API アクセス許可**: 必要なスコープを設定
+4. **トークン設定**: 暗黙的フロー用の ID トークンを有効化
 
-### MSAL Configuration
+### MSAL 設定
 
-The MSAL configuration is centralized in `src/config/authConfig.ts`:
+MSAL 設定は `src/config/authConfig.ts` で一元化されています:
 
 ```typescript
 export const msalConfig: Configuration = {

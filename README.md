@@ -1,88 +1,88 @@
-# Azure React Django App
+# Azure React Django アプリ
 
-A full-stack demo application implementing Single Sign-On (SSO) with Azure Active Directory using React TypeScript frontend and Django backend.
+React TypeScript フロントエンドと Django バックエンドを使用して Azure Active Directory とのシングルサインオン（SSO）を実装したフルスタックデモアプリケーションです。
 
-## Features
+## 機能
 
-- **Azure AD SSO Integration**: Secure authentication using Microsoft Authentication Library (MSAL)
-- **React TypeScript Frontend**: Modern React app with TypeScript and Tailwind CSS
-- **Django Backend**: Python backend with JWT token verification
-- **Session Management**: Automatic token refresh and secure storage
+- **Azure AD SSO 統合**: Microsoft Authentication Library (MSAL) を使用したセキュアな認証
+- **React TypeScript フロントエンド**: TypeScript と Tailwind CSS を使用したモダンな React アプリ
+- **Django バックエンド**: JWT トークン検証機能付きの Python バックエンド
+- **セッション管理**: 自動トークンリフレッシュとセキュアストレージ
 
-## Architecture
+## アーキテクチャ
 
-### Authentication Flow
+### 認証フロー
 
-- **Protocol**: OpenID Connect (OIDC) / OAuth 2.0
-- **Flow**: Authorization Code Flow with PKCE for enhanced security
-- **Token Management**: Access tokens and ID tokens stored in session storage
-- **Auto-refresh**: MSAL.js automatically refreshes tokens before expiration
+- **プロトコル**: OpenID Connect (OIDC) / OAuth 2.0
+- **フロー**: セキュリティ強化のための PKCE 付き認証コードフロー
+- **トークン管理**: アクセストークンと ID トークンをセッションストレージに保存
+- **自動リフレッシュ**: MSAL.js が期限切れ前に自動的にトークンをリフレッシュ
 
-## Quick Start
+## クイックスタート
 
-### Prerequisites
+### 前提条件
 
-- Node.js (v18 or higher)
-- Python (v3.11 or higher)
-- Azure AD application registration
+- Node.js（v18 以上）
+- Python（v3.11 以上）
+- Azure AD アプリケーション登録
 
-### Clone the Repository
+### リポジトリのクローン
 
 ```bash
 git clone https://github.com/h-dianne/azure-react-django-app.git
 cd azure-react-django-app
 ```
 
-### Frontend Setup
+### フロントエンドセットアップ
 
-See detailed setup instructions in [`frontend/README.md`](frontend/README.md)
+詳細なセットアップ手順については [`frontend/README.md`](frontend/README.md) をご覧ください
 
 ```bash
 cd frontend
 npm install
-# Configure .env file (see frontend/README.md)
+# .envファイルを設定（frontend/README.md を参照）
 npm run dev
 ```
 
-Frontend will be available at `http://localhost:5173`
+フロントエンドは `http://localhost:5173` でアクセスできます。
 
-### Backend Setup
+### バックエンドセットアップ
 
-See detailed setup instructions in [`backend/README.md`](backend/README.md)
+詳細なセットアップ手順については [`backend/README.md`](backend/README.md) をご覧ください
 
 ```bash
 cd backend
 uv sync
-# Configure .env file (see backend/README.md)
+# .envファイルを設定（backend/README.md を参照）
 uv run python manage.py migrate
 uv run python manage.py runserver
 ```
 
-Backend API will be available at `http://localhost:8000`
+バックエンド API は `http://localhost:8000` でアクセスできます。
 
-## Documentation
+## ドキュメント
 
-- **[Frontend Documentation](frontend/README.md)**: Complete React TypeScript setup and configuration
-- **[Backend Documentation](backend/README.md)**: Complete Django backend setup and architecture
+- **[フロントエンドドキュメント](frontend/README.md)**: 完全な React TypeScript セットアップと設定
+- **[バックエンドドキュメント](backend/README.md)**: 完全な Django バックエンドセットアップとアーキテクチャ
 
-## Project Structure
+## プロジェクト構造
 
 ```text
 azure-react-django-app/
-├── frontend/                 # React TypeScript frontend
+├── frontend/                 # React TypeScript フロントエンド
 │   ├── src/
-│   │   ├── components/      # Reusable UI components
-│   │   ├── config/          # Azure AD configuration
-│   │   ├── pages/           # Application pages
-│   │   └── types/           # TypeScript type definitions
-│   ├── .env                 # Environment variables
-│   ├── package.json         # Frontend dependencies
-│   └── README.md            # Frontend documentation
-├── backend/                 # Django backend
-│   ├── apps/                # Django applications
-│   ├── config/              # Django configuration
-│   ├── .env                 # Environment variables
-│   ├── pyproject.toml       # Backend dependencies
-│   └── README.md            # Backend documentation
-└── README.md                # This file
+│   │   ├── components/      # UI コンポーネント
+│   │   ├── config/          # Azure AD 設定
+│   │   ├── pages/           # アプリケーションページ
+│   │   └── types/           # TypeScript 型定義
+│   ├── .env                 # 環境変数
+│   ├── package.json         # フロントエンド依存関係
+│   └── README.md            # フロントエンドドキュメント
+├── backend/                 # Django バックエンド
+│   ├── apps/                # Django アプリケーション
+│   ├── config/              # Django 設定
+│   ├── .env                 # 環境変数
+│   ├── pyproject.toml       # バックエンド依存関係
+│   └── README.md            # バックエンドドキュメント
+└── README.md                # このファイル
 ```

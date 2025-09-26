@@ -1,66 +1,65 @@
-# Backend - Django with Azure AD JWT Authentication
+# バックエンド - Azure AD JWT 認証 Django
 
-A Django REST Framework backend with Azure Active Directory JWT token authentication.
+Azure Active Directory JWT トークン認証を使用した Django REST Framework バックエンドです。
 
-## Features
+## 機能
 
-- **Azure AD JWT Validation**: Secure token verification using PyJWT
-- **Automatic User Management**: User creation/identification via Azure AD Object ID (oid)
-- **Public Key Caching**: 24-hour caching of Azure AD public keys for performance
-- **Django REST Framework**: Modern API development with DRF
-- **Custom Authentication**: DRF authentication class for seamless Azure AD integration
+- **Azure AD JWT 検証**: PyJWT を使用したセキュアなトークン検証
+- **自動ユーザー管理**: Azure AD オブジェクト ID (oid) によるユーザー作成/識別
+- **公開キーキャッシュ**: パフォーマンス向上のための Azure AD 公開キーの 24 時間キャッシュ
+- **Django REST Framework**: DRF を使用したモダンな API 開発
+- **カスタム認証**: シームレスな Azure AD 統合のための DRF 認証クラス
 
-## Technology Stack
+## 技術スタック
 
-- **Framework**: Django 5.2+ with Django REST Framework
-- **Package Manager**: UV package manager
-- **JWT Library**: PyJWT for token validation
-- **Cryptography**: RSA signature verification with Azure AD public keys
-- **Caching**: Django Redis cache for public key storage
-- **HTTP Client**: Requests library for Azure AD API calls
+- **フレームワーク**: Django REST Framework を使った Django 5.2+
+- **パッケージマネージャー**: UV パッケージマネージャー
+- **JWT ライブラリ**: トークン検証のための PyJWT
+- **暗号化**: Azure AD 公開キーを使用した RSA 署名検証
+- **キャッシュ**: 公開キーストレージのための Django Redis キャッシュ
+- **HTTP クライアント**: Azure AD API 呼び出しのための Requests ライブラリ
 
-## Implementation Details
+## 実装詳細
 
-### Authentication Architecture
+### 認証アーキテクチャ
 
-- **JWT Token Validation**: RS256 algorithm with Azure AD public keys
-- **Public Key Management**: Automatic fetching and 24-hour caching
-- **User Resolution**: Extract Object ID (oid) from token claims
-- **Security**: Audience and issuer verification for enhanced security
+- **JWT トークン検証**: Azure AD 公開キーを使用した RS256 アルゴリズム
+- **公開キー管理**: 自動取得と 24 時間キャッシュ
+- **ユーザー解決**: トークンクレームからオブジェクト ID (oid) を抽出
+- **セキュリティ**: セキュリティ強化のためのオーディエンスとイシュア検証
 
-### Key Components
+### 主要コンポーネント
 
-- **`AzureADAuthentication`**: DRF authentication class handling token validation
-- **`AzureADJWTService`**: Service for JWT validation and public key management
-- **`AzureADBackend`**: Django authentication backend for session-based auth
-- **Custom User Model**: Extended user model with Azure AD Object ID support
-- **Caching Layer**: Redis/Django cache for performance optimization
+- **`AzureADAuthentication`**: トークン検証を処理する DRF 認証クラス
+- **`AzureADJWTService`**: JWT 検証と公開キー管理のサービス
+- **`AzureADBackend`**: セッションベース認証用の Django 認証バックエンド
+- **カスタムユーザーモデル**: Azure AD オブジェクト ID サポート付き拡張ユーザーモデル
 
-## Getting Started
+## セットアップ
 
-### Prerequisites
+### 前提条件
 
-- Python (v3.11 or higher)
-- UV package manager
-- Azure AD application registration
+- Python（v3.11 以上）
+- UV パッケージマネージャー
+- Azure AD アプリケーション登録
 
-### Installation
+### インストール
 
-1. **Install UV (if not already installed):**
+1. **UV をインストール（まだインストールしていない場合）:**
 
    ```bash
    pip install uv
    ```
 
-2. **Install dependencies and create virtual environment:**
+2. **依存関係をインストールし、仮想環境を作成:**
 
    ```bash
    uv sync
    ```
 
-3. **Configure environment variables:**
+3. **環境変数を設定:**
 
-   Create a `.env` file in the backend directory:
+   backend ディレクトリに `.env` ファイルを作成:
 
    ```properties
    # Django Settings
@@ -75,113 +74,113 @@ A Django REST Framework backend with Azure Active Directory JWT token authentica
    AZURE_AD_JWKS_URI=https://login.microsoftonline.com/your-tenant-id/discovery/v2.0/keys
    ```
 
-4. **Run database migrations:**
+4. **データベースマイグレーションを実行:**
 
    ```bash
    uv run python manage.py migrate
    ```
 
-5. **Start the development server:**
+5. **開発サーバーを起動:**
 
    ```bash
    uv run python manage.py runserver
    ```
 
-   The API will be available at `http://localhost:8000`
+   API は `http://localhost:8000` で利用できます
 
-## Available Commands
+## コマンド
 
-- **`uv run python manage.py migrate`**: Run database migrations
-- **`uv run python manage.py makemigrations`**: Create new migrations
-- **`uv run python manage.py createsuperuser`**: Create admin user
-- **`uv run python manage.py test`**: Run test suite
-- **`uv run python manage.py shell`**: Django interactive shell
+- **`uv run python manage.py migrate`**: データベースマイグレーションを実行
+- **`uv run python manage.py makemigrations`**: 新しいマイグレーションを作成
+- **`uv run python manage.py createsuperuser`**: 管理者ユーザーを作成
+- **`uv run python manage.py test`**: テストスイートを実行
+- **`uv run python manage.py shell`**: Django インタラクティブシェル
 
-## Environment Variables
+## 環境変数
 
-| Variable             | Description                     | Example                                                           |
-| -------------------- | ------------------------------- | ----------------------------------------------------------------- |
-| `DEBUG`              | Django debug mode               | `True`                                                            |
-| `SECRET_KEY`         | Django secret key               | `your-secret-key-here`                                            |
-| `AZURE_AD_TENANT_ID` | Azure AD tenant ID              | `your-tenant-id`                                                  |
-| `AZURE_AD_CLIENT_ID` | Azure AD application client ID  | `your-client-id`                                                  |
-| `AZURE_AD_AUDIENCE`  | Expected audience in JWT tokens | `api://client-id/access_as_user`                                  |
-| `AZURE_AD_ISSUER`    | JWT issuer URL                  | `https://login.microsoftonline.com/tenant-id/v2.0`                |
-| `AZURE_AD_JWKS_URI`  | Azure AD public keys endpoint   | `https://login.microsoftonline.com/tenant-id/discovery/v2.0/keys` |
+| 変数名               | 説明                                     | 例                                                                |
+| -------------------- | ---------------------------------------- | ----------------------------------------------------------------- |
+| `DEBUG`              | Django デバッグモード                    | `True`                                                            |
+| `SECRET_KEY`         | Django シークレットキー                  | `your-secret-key-here`                                            |
+| `AZURE_AD_TENANT_ID` | Azure AD テナント ID                     | `your-tenant-id`                                                  |
+| `AZURE_AD_CLIENT_ID` | Azure AD アプリケーションクライアント ID | `your-client-id`                                                  |
+| `AZURE_AD_AUDIENCE`  | JWT トークンで期待されるオーディエンス   | `api://client-id/access_as_user`                                  |
+| `AZURE_AD_ISSUER`    | JWT イシュア URL                         | `https://login.microsoftonline.com/tenant-id/v2.0`                |
+| `AZURE_AD_JWKS_URI`  | Azure AD 公開キーエンドポイント          | `https://login.microsoftonline.com/tenant-id/discovery/v2.0/keys` |
 
-## Project Structure
+## プロジェクト構造
 
 ```text
 backend/
-├── apps/                    # Django applications
-│   ├── authentication/     # Azure AD authentication logic
-│   │   ├── backends.py     # DRF authentication classes
-│   │   ├── services.py     # JWT validation service
-│   │   └── utils.py        # Helper utilities
-│   ├── core/               # Core application logic
-│   └── users/              # User model and management
-├── config/                 # Django configuration
-│   ├── settings/           # Environment-specific settings
-│   │   ├── base.py        # Base settings
-│   │   └── development.py  # Development settings
-│   ├── urls.py            # URL configuration
-│   └── wsgi.py            # WSGI application
-├── .env                   # Environment variables (create this)
-├── manage.py              # Django management script
-└── pyproject.toml         # Python dependencies (UV format)
+├── apps/                    # Django アプリケーション
+│   ├── authentication/     # Azure AD 認証ロジック
+│   │   ├── backends.py     # DRF 認証クラス
+│   │   ├── services.py     # JWT 検証サービス
+│   │   └── utils.py        # ヘルパーユーティリティ
+│   ├── core/               # コアアプリケーションロジック
+│   └── users/              # ユーザーモデルと管理
+├── config/                 # Django 設定
+│   ├── settings/           # 環境固有の設定
+│   │   ├── base.py        # ベース設定
+│   │   └── development.py  # 開発設定
+│   ├── urls.py            # URL 設定
+│   └── wsgi.py            # WSGI アプリケーション
+├── .env                   # 環境変数（これを作成）
+├── manage.py              # Django 管理スクリプト
+└── pyproject.toml         # Python 依存関係（UV 形式）
 ```
 
-## Authentication Flow
+## 認証フロー
 
-### JWT Token Validation Process
+### JWT トークン検証プロセス
 
-1. **Token Extraction**: Extract Bearer token from Authorization header
-2. **Header Validation**: Decode token header to get Key ID (kid)
-3. **Public Key Retrieval**: Fetch Azure AD public keys (with 24-hour caching)
-4. **Key Matching**: Find the appropriate public key using the kid
-5. **Token Validation**: Verify signature, expiration, audience, and issuer
-6. **Claims Extraction**: Extract user information from token claims
-7. **User Resolution**: Get or create user based on Object ID (oid)
+1. **トークン抽出**: Authorization ヘッダーから Bearer トークンを抽出
+2. **ヘッダー検証**: トークンヘッダーをデコードしてキー ID (kid) を取得
+3. **公開キー取得**: Azure AD 公開キーを取得（24 時間キャッシュ付き）
+4. **キーマッチング**: kid を使用して適切な公開キーを検索
+5. **トークン検証**: 署名、有効期限、オーディエンス、イシュアを検証
+6. **クレーム抽出**: トークンクレームからユーザー情報を抽出
+7. **ユーザー解決**: オブジェクト ID (oid) に基づいてユーザーを取得または作成
 
-### Security Features
+### セキュリティ機能
 
-- **RS256 Algorithm**: Asymmetric cryptography for secure token verification
-- **Audience Validation**: Ensures tokens are intended for this application
-- **Issuer Verification**: Confirms tokens come from trusted Azure AD tenant
-- **Expiration Check**: Respects JWT expiration claims
-- **Automatic Key Rotation**: Handles Azure AD public key changes seamlessly
-- **Comprehensive Error Handling**: Proper HTTP responses for authentication failures
+- **RS256 アルゴリズム**: セキュアなトークン検証のための非対称暗号
+- **オーディエンス検証**: トークンがこのアプリケーション用であることを確認
+- **イシュア検証**: トークンが信頼できる Azure AD テナントからのものであることを確認
+- **有効期限チェック**: JWT 有効期限クレームを尊重
+- **自動キーローテーション**: Azure AD 公開キーの変更をシームレスに処理
+- **包括的エラー処理**: 認証失敗に対する適切な HTTP レスポンス
 
-## Azure AD Configuration
+## Azure AD 設定
 
-### Required Azure AD Setup
+### 必要な Azure AD セットアップ
 
-1. **App Registration**: Create an Azure AD app registration
-2. **API Permissions**: Configure necessary API scopes
-3. **Expose API**: Create custom scopes for your application
-4. **Authentication**: Configure token settings and redirect URIs
+1. **アプリ登録**: Azure AD アプリ登録を作成
+2. **API アクセス許可**: 必要な API スコープを設定
+3. **API の公開**: アプリケーション用のカスタムスコープを作成
+4. **認証**: トークン設定とリダイレクト URI を設定
 
-### Token Claims
+### トークンクレーム
 
-The backend expects these claims in JWT tokens:
+バックエンドは JWT トークンに以下のクレームを期待します:
 
-- **`aud`**: Audience (must match AZURE_AD_AUDIENCE)
-- **`iss`**: Issuer (must match AZURE_AD_ISSUER)
-- **`oid`**: Object ID (used for user identification)
-- **`exp`**: Expiration time
-- **`sub`**: Subject identifier
+- **`aud`**: オーディエンス（AZURE_AD_AUDIENCE と一致する必要があります）
+- **`iss`**: イシュア（AZURE_AD_ISSUER と一致する必要があります）
+- **`oid`**: オブジェクト ID（ユーザー識別に使用）
+- **`exp`**: 有効期限
+- **`sub`**: サブジェクト識別子
 
-## API Endpoints
+## API エンドポイント
 
-### Authentication
+### 認証
 
-All API endpoints require a valid Azure AD JWT token in the Authorization header:
+すべての API エンドポイントには、Authorization ヘッダーに有効な Azure AD JWT トークンが必要です:
 
 ```text
 Authorization: Bearer <your-jwt-token>
 ```
 
-### Example Protected Endpoint
+### 保護されたエンドポイントの例
 
 ```python
 from rest_framework.decorators import api_view
@@ -190,24 +189,24 @@ from apps.authentication.backends import AzureADAuthentication
 
 @api_view(['GET'])
 def protected_view(request):
-    # Authentication is handled automatically by DRF
-    user = request.user  # Authenticated Azure AD user
+    # 認証は DRF によって自動的に処理されます
+    user = request.user  # 認証された Azure AD ユーザー
     return Response({'message': f'Hello, {user.username}!'})
 ```
 
-## Caching
+## キャッシュ
 
-The backend implements intelligent caching for Azure AD public keys:
+バックエンドは Azure AD 公開キーのためのインテリジェントキャッシュを実装しています:
 
-- **Cache Duration**: 24 hours (configurable)
-- **Cache Key**: `azure_ad_jwks`
-- **Fallback**: Automatic refetch if cache miss
-- **Performance**: Reduces API calls to Azure AD
+- **キャッシュ期間**: 24 時間（設定可能）
+- **キャッシュキー**: `azure_ad_jwks`
+- **フォールバック**: キャッシュミス時の自動再取得
+- **パフォーマンス**: Azure AD への API 呼び出しを削減
 
-## Error Handling
+## エラー処理
 
-### Authentication Errors
+### 認証エラー
 
-- **`401 Unauthorized`**: Invalid or expired token
-- **`403 Forbidden`**: Valid token but insufficient permissions
-- **HTTP Headers**: Proper WWW-Authenticate headers for 401 responses
+- **`401 Unauthorized`**: 無効または期限切れのトークン
+- **`403 Forbidden`**: 有効なトークンですが権限不足
+- **HTTP ヘッダー**: 401 レスポンス用の適切な WWW-Authenticate ヘッダー
